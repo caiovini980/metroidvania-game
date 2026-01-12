@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkwsuolqt4wds"]
+
+[ext_resource type="Texture2D" uid="uid://b0ljnj0rs3w27" path="res://Scenes/Enemy/enemyFlyingAlt_1.png" id="1_241br"]
+[ext_resource type="Script" uid="uid://db5avytuy1avr" path="res://Scenes/Enemy/Mob.gd" id="1_spujv"]
+[ext_resource type="Texture2D" uid="uid://cdjsk66buru6v" path="res://Scenes/Enemy/enemyFlyingAlt_2.png" id="2_87a44"]
+[ext_resource type="Texture2D" uid="uid://bl2gkms2qn5i5" path="res://Scenes/Enemy/enemySwimming_1.png" id="3_ujc2f"]
+[ext_resource type="Texture2D" uid="uid://c7a1se1yrjg5w" path="res://Scenes/Enemy/enemySwimming_2.png" id="4_083ig"]
+[ext_resource type="Texture2D" uid="uid://b0mft0pj4ptaq" path="res://Scenes/Enemy/enemyWalking_1.png" id="5_dgda8"]
+[ext_resource type="Texture2D" uid="uid://cmvnkl4p1n2xu" path="res://Scenes/Enemy/enemyWalking_2.png" id="6_drf00"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0pbe4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_241br")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_87a44")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ujc2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_083ig")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dgda8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_drf00")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0fj4"]
+radius = 20.09975
+
+[node name="Mob" type="RigidBody2D" node_paths=PackedStringArray("collision_shape_2d") groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_spujv")
+collision_shape_2d = NodePath("CollisionShape2D")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_0pbe4")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13, 0)
+scale = Vector2(0.9732574, 1)
+shape = SubResource("CircleShape2D_i0fj4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
