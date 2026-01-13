@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://ba81mfrps5pxx"]
 
-[ext_resource type="Script" uid="uid://dua876m1m7jn6" path="res://Scenes/Main/Main.gd" id="1_idj7w"]
-[ext_resource type="PackedScene" uid="uid://dnsx6tcwtcfjh" path="res://Scenes/Player.tscn" id="1_r150o"]
-[ext_resource type="PackedScene" uid="uid://bkwsuolqt4wds" path="res://Scenes/Mob.tscn" id="2_kln2b"]
-[ext_resource type="PackedScene" uid="uid://676am2pgayvq" path="res://Scenes/HUD.tscn" id="4_rgh2o"]
-[ext_resource type="AudioStream" uid="uid://dwkt580ghuie0" path="res://art/House In a Forest Loop.ogg" id="5_v1gob"]
-[ext_resource type="AudioStream" uid="uid://dn5ib1dnt0qir" path="res://art/gameover.wav" id="6_jw32o"]
+[ext_resource type="Script" uid="uid://dua876m1m7jn6" path="res://template_project/Scenes/Main/Main.gd" id="1_idj7w"]
+[ext_resource type="PackedScene" uid="uid://dnsx6tcwtcfjh" path="res://template_project/Scenes/Player.tscn" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://bkwsuolqt4wds" path="res://template_project/Scenes/Mob.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://676am2pgayvq" path="res://template_project/Scenes/HUD.tscn" id="4_rgh2o"]
+[ext_resource type="AudioStream" uid="uid://dwkt580ghuie0" path="res://template_project/art/House In a Forest Loop.ogg" id="5_v1gob"]
+[ext_resource type="AudioStream" uid="uid://dn5ib1dnt0qir" path="res://template_project/art/gameover.wav" id="6_jw32o"]
 
 [sub_resource type="Curve2D" id="Curve2D_r150o"]
 _data = {

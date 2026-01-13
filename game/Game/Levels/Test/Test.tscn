@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://docgwfusbg4d7"]
+
+[ext_resource type="Script" uid="uid://dopv83uagvvfr" path="res://Game/Levels/Test/TestScene.gd" id="1_0am12"]
+[ext_resource type="Script" uid="uid://cj68lilupyjmo" path="res://Game/Managers/CharacterManager.gd" id="2_ivrkv"]
+[ext_resource type="PackedScene" uid="uid://bh2rxmxy4sgqy" path="res://Game/Characters/Player/Player.tscn" id="3_8p3g4"]
+
+[sub_resource type="Gradient" id="Gradient_8p3g4"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_njdjm"]
+gradient = SubResource("Gradient_8p3g4")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8p3g4"]
+a = Vector2(-1279, -10)
+b = Vector2(1285, -10)
+
+[node name="Test" type="Node2D" node_paths=PackedStringArray("Managers")]
+script = ExtResource("1_0am12")
+Managers = [NodePath("Managers/CharacterManager")]
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="CharacterManager" type="Node" parent="Managers"]
+script = ExtResource("2_ivrkv")
+player_character = ExtResource("3_8p3g4")
+
+[node name="PlayerSpawnPosition" type="Marker2D" parent="Managers/CharacterManager"]
+position = Vector2(230, 851)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Node2D" type="StaticBody2D" parent="Environment"]
+position = Vector2(905, 923)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Node2D"]
+scale = Vector2(10, 21)
+texture = SubResource("GradientTexture1D_njdjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Node2D"]
+shape = SubResource("SegmentShape2D_8p3g4")

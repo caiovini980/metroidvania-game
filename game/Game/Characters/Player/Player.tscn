@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh2rxmxy4sgqy"]
+
+[ext_resource type="Script" uid="uid://c0xgbky8tws5q" path="res://Game/Characters/Player/Walk.gd" id="1_7qean"]
+[ext_resource type="Script" uid="uid://b0nfdhryt1x7n" path="res://Game/Characters/Player/Player.gd" id="1_nnbg8"]
+[ext_resource type="Texture2D" uid="uid://d1g2v5nvbk3df" path="res://template_project/Scenes/Player/playerGrey_walk1.png" id="3_sgod2"]
+[ext_resource type="Texture2D" uid="uid://cjnw5yjklo8tq" path="res://template_project/Scenes/Player/playerGrey_walk2.png" id="4_hayeu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nnbg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sgod2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hayeu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgod2"]
+radius = 40.0
+height = 136.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_nnbg8")
+jump_velocity = -600.0
+max_health = 100.0
+current_health = 100.0
+walk_speed = 400.0
+gravity = 400.0
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource("1_7qean")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nnbg8")
+animation = &"walk"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sgod2")
