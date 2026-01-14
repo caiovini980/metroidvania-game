@@ -17,15 +17,6 @@ b = Vector2(1285, -10)
 script = ExtResource("1_0am12")
 Managers = [NodePath("Managers/CharacterManager")]
 
-[node name="Managers" type="Node" parent="."]
-
-[node name="CharacterManager" type="Node" parent="Managers"]
-script = ExtResource("2_ivrkv")
-player_character = ExtResource("3_8p3g4")
-
-[node name="PlayerSpawnPosition" type="Marker2D" parent="Managers/CharacterManager"]
-position = Vector2(230, 851)
-
 [node name="Environment" type="Node" parent="."]
 
 [node name="Floor" type="StaticBody2D" parent="Environment"]
@@ -48,3 +39,12 @@ texture = SubResource("GradientTexture1D_njdjm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Plataform"]
 scale = Vector2(0.15, 1)
 shape = SubResource("SegmentShape2D_8p3g4")
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="CharacterManager" type="Node" parent="Managers"]
+script = ExtResource("2_ivrkv")
+player_character = ExtResource("3_8p3g4")
+
+[node name="PlayerSpawnPosition" type="Marker2D" parent="Managers/CharacterManager"]
+position = Vector2(230, 851)

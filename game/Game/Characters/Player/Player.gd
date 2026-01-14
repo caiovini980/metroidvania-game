@@ -1,14 +1,22 @@
 class_name Player extends CharacterBase
 
-@export var jump_velocity: float = -400
-@export var move_direction: Vector2
+@export_group("Control Variables")
+@export var jump_force: float
+
+@export_group("Animation")
 @export var animation_player: AnimationPlayer
 @export var animated_sprite: AnimatedSprite2D
 
-@export var current_velocity: Vector2
+@export_group("Particles")
+@export var step_particles: GPUParticles2D
+
+@export_group("Audio")
+@export var audio_player: AudioStreamPlayer2D
+@export var steps_sfx: Array[AudioStream]
 
 var last_faced_direction: Vector2 = Vector2.ZERO
 var has_jumped: bool = false
+var move_direction: Vector2
 
 func _enter_tree():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -18,6 +26,9 @@ func _enter_tree():
 		
 	if animated_sprite == null:
 		animated_sprite = $Sprite
+		
+	if step_particles == null:
+		step_particles = $StepParticles
 	
 	print("Instantiated Player")
 
@@ -25,8 +36,6 @@ func update(delta: float) -> void:
 	_handle_input(delta)
 
 func _handle_input(delta: float) -> void:
-	current_velocity = velocity
-	
 	# handle movement
 	move_direction = Vector2.ZERO
 	
@@ -54,7 +63,6 @@ func _handle_input(delta: float) -> void:
 func handle_animations() -> void:
 	if !is_on_floor():
 		if velocity.y > 0 and !has_jumped:
-			print("playing falling")
 			animation_player.play("falling")
 		else:
 			animation_player.play("jump")
@@ -66,9 +74,14 @@ func handle_animations() -> void:
 		else:
 			animation_player.play("idle")
 
+func on_step() -> void:
+	step_particles.restart()
+	step_particles.emitting = true
+	audio_player.stream = steps_sfx[randi_range(0, steps_sfx.size() - 1)]
+	audio_player.play()
+
 func _jump() -> void:
 	if is_on_floor():
-		print("playing jump")
-		velocity.y = jump_velocity
+		velocity.y = jump_force
 		has_jumped = true
 	
