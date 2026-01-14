@@ -28,12 +28,23 @@ position = Vector2(230, 851)
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="Node2D" type="StaticBody2D" parent="Environment"]
+[node name="Floor" type="StaticBody2D" parent="Environment"]
 position = Vector2(905, 923)
 
-[node name="Sprite2D" type="Sprite2D" parent="Environment/Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Floor"]
 scale = Vector2(10, 21)
 texture = SubResource("GradientTexture1D_njdjm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Node2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Floor"]
+shape = SubResource("SegmentShape2D_8p3g4")
+
+[node name="Plataform" type="StaticBody2D" parent="Environment"]
+position = Vector2(1621, 759)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Plataform"]
+scale = Vector2(1.5, 21)
+texture = SubResource("GradientTexture1D_njdjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Plataform"]
+scale = Vector2(0.15, 1)
 shape = SubResource("SegmentShape2D_8p3g4")

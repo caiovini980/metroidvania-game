@@ -1,7 +1,7 @@
 extends Node
 
 @export var Managers: Array[ManagerBase]
-   
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Initializing managers on Test Scene")
