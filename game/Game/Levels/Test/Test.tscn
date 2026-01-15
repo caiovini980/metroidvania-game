@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://docgwfusbg4d7"]
 
 [ext_resource type="Script" uid="uid://dopv83uagvvfr" path="res://Game/Levels/Test/TestScene.gd" id="1_0am12"]
-[ext_resource type="Script" uid="uid://cj68lilupyjmo" path="res://Game/Managers/CharacterManager.gd" id="2_ivrkv"]
+[ext_resource type="Script" uid="uid://cj68lilupyjmo" path="res://Game/Characters/CharacterManager.gd" id="2_ivrkv"]
 [ext_resource type="PackedScene" uid="uid://bh2rxmxy4sgqy" path="res://Game/Characters/Player/Player.tscn" id="3_8p3g4"]
 
 [sub_resource type="Gradient" id="Gradient_8p3g4"]

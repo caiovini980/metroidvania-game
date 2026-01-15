@@ -1,25 +1,26 @@
-[gd_scene load_steps=80 format=3 uid="uid://bh2rxmxy4sgqy"]
+[gd_scene load_steps=84 format=3 uid="uid://bh2rxmxy4sgqy"]
 
 [ext_resource type="Script" uid="uid://b0nfdhryt1x7n" path="res://Game/Characters/Player/Player.gd" id="1_nnbg8"]
-[ext_resource type="AudioStream" uid="uid://c52bdlq5oou74" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_01.wav" id="2_xp8ll"]
-[ext_resource type="AudioStream" uid="uid://jb58ua7bamhn" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_02.wav" id="3_0fq0d"]
+[ext_resource type="AudioStream" uid="uid://c52bdlq5oou74" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_01.wav" id="2_xp8ll"]
+[ext_resource type="AudioStream" uid="uid://jb58ua7bamhn" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_02.wav" id="3_0fq0d"]
 [ext_resource type="Texture2D" uid="uid://c88ru755ekrak" path="res://Game/Characters/Player/Animations/Idle/01.png" id="3_ry3dg"]
-[ext_resource type="AudioStream" uid="uid://btmby3hcfst4m" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_03.wav" id="4_6wwaa"]
+[ext_resource type="AudioStream" uid="uid://btmby3hcfst4m" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_03.wav" id="4_6wwaa"]
 [ext_resource type="Texture2D" uid="uid://dsda27o3l0hg4" path="res://Game/Characters/Player/Animations/Idle/02.png" id="4_qwbmt"]
 [ext_resource type="Texture2D" uid="uid://dg056phjnyg1p" path="res://Game/Characters/Player/Animations/Idle/03.png" id="5_1coae"]
-[ext_resource type="AudioStream" uid="uid://bkyl2l5j2jd0k" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_04.wav" id="5_i4qf6"]
-[ext_resource type="AudioStream" uid="uid://bny7g2pjbawck" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_05.wav" id="6_4jmse"]
+[ext_resource type="AudioStream" uid="uid://bkyl2l5j2jd0k" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_04.wav" id="5_i4qf6"]
+[ext_resource type="AudioStream" uid="uid://bny7g2pjbawck" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_05.wav" id="6_4jmse"]
 [ext_resource type="Texture2D" uid="uid://c1wwwhks0s58" path="res://Game/Characters/Player/Animations/Idle/04.png" id="6_lb2d6"]
-[ext_resource type="AudioStream" uid="uid://bnocwsqveu6qv" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_06.wav" id="7_2tc04"]
+[ext_resource type="AudioStream" uid="uid://bnocwsqveu6qv" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_06.wav" id="7_2tc04"]
 [ext_resource type="Texture2D" uid="uid://bu5briri41tgd" path="res://Game/Characters/Player/Animations/Idle/05.png" id="7_ayuli"]
 [ext_resource type="Texture2D" uid="uid://cptm1tebkmv00" path="res://Game/Characters/Player/Animations/Idle/06.png" id="8_3ra76"]
-[ext_resource type="AudioStream" uid="uid://dvdgq5yxowuk2" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_07.wav" id="8_xcu25"]
+[ext_resource type="AudioStream" uid="uid://dvdgq5yxowuk2" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_07.wav" id="8_xcu25"]
 [ext_resource type="Texture2D" uid="uid://3elc2jvq1025" path="res://Game/Characters/Player/Animations/Idle/07.png" id="9_k6edj"]
-[ext_resource type="AudioStream" uid="uid://m28r1bknlbic" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_08.wav" id="9_pe2hh"]
+[ext_resource type="AudioStream" uid="uid://m28r1bknlbic" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_08.wav" id="9_pe2hh"]
 [ext_resource type="Texture2D" uid="uid://c3whia4chvotm" path="res://Game/Characters/Player/Animations/Idle/08.png" id="10_2vyxd"]
-[ext_resource type="AudioStream" uid="uid://do1j7jbhmyhqy" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_09.wav" id="10_cogra"]
-[ext_resource type="AudioStream" uid="uid://cb3fcj2w7ftyi" path="res://Game/Characters/Player/Effects/SFX/Footsteps_Sand_Walk_10.wav" id="11_mauia"]
+[ext_resource type="AudioStream" uid="uid://do1j7jbhmyhqy" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_09.wav" id="10_cogra"]
+[ext_resource type="AudioStream" uid="uid://cb3fcj2w7ftyi" path="res://Game/Characters/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_10.wav" id="11_mauia"]
 [ext_resource type="Texture2D" uid="uid://dbnrdf5yqba4u" path="res://Game/Characters/Player/Animations/Idle/09.png" id="11_sutk5"]
+[ext_resource type="PackedScene" uid="uid://nnya1eu8h07c" path="res://Game/Settings/Components/Scenes/MovementComponent.tscn" id="12_0fq0d"]
 [ext_resource type="Texture2D" uid="uid://fhsaq16pamqa" path="res://Game/Characters/Player/Animations/Idle/10.png" id="12_6tni5"]
 [ext_resource type="Texture2D" uid="uid://dk2mfiwbhcadr" path="res://Game/Characters/Player/Animations/Idle/11.png" id="13_0omhs"]
 [ext_resource type="Texture2D" uid="uid://82yf6stnanjw" path="res://Game/Characters/Player/Animations/Idle/12.png" id="14_v7w3u"]
@@ -66,6 +67,10 @@
 [ext_resource type="Texture2D" uid="uid://cqs8gv3jijbcf" path="res://Game/Characters/Player/Animations/Jump/18.png" id="40_xcu25"]
 [ext_resource type="Texture2D" uid="uid://4wqcaklnswwm" path="res://Game/Characters/Player/Animations/Jump/19.png" id="41_pe2hh"]
 [ext_resource type="Texture2D" uid="uid://mpgnre82wy5p" path="res://Game/Characters/Player/Effects/VFX/step_smoke_1.png" id="56_2ak26"]
+[ext_resource type="PackedScene" uid="uid://cgdcwhdsr600o" path="res://Game/Settings/Components/Scenes/TriggerComponent.tscn" id="58_2tc04"]
+[ext_resource type="PackedScene" uid="uid://c0itqc4l7ca32" path="res://Game/Settings/Components/Scenes/SoundEmitterComponent.tscn" id="58_c4upe"]
+[ext_resource type="AudioStream" uid="uid://knr4a0gbm3yo" path="res://Game/Characters/Player/Effects/SFX/Jump/phaserUp6.ogg" id="69_i4qf6"]
+[ext_resource type="PackedScene" uid="uid://rlxagkokc86l" path="res://Game/Settings/Components/Scenes/CollisionComponent.tscn" id="70_4jmse"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nnbg8"]
 animations = [{
@@ -467,10 +472,6 @@ _data = {
 &"walk": SubResource("Animation_wom45")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgod2"]
-radius = 41.0
-height = 158.0
-
 [sub_resource type="Curve" id="Curve_mh0rf"]
 _data = [Vector2(0.013254788, 1), 0.0, 0.0, 0, 0, Vector2(0.25478643, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -503,35 +504,41 @@ scale_min = 0.5
 scale_curve = SubResource("CurveTexture_mh0rf")
 alpha_curve = SubResource("CurveTexture_c4upe")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animated_sprite", "step_particles", "audio_player")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animated_sprite", "step_particles", "movement_component", "collision_component", "step_sound_emitter_component", "jump_sound_emitter_component")]
 position = Vector2(1, -57)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_nnbg8")
-jump_force = -600.0
 animation_player = NodePath("AnimationPlayer")
 animated_sprite = NodePath("Sprite")
 step_particles = NodePath("StepParticles")
-audio_player = NodePath("AudioStreamPlayer2D")
-steps_sfx = Array[AudioStream]([ExtResource("2_xp8ll"), ExtResource("3_0fq0d"), ExtResource("4_6wwaa"), ExtResource("5_i4qf6"), ExtResource("6_4jmse"), ExtResource("7_2tc04"), ExtResource("8_xcu25"), ExtResource("9_pe2hh"), ExtResource("10_cogra"), ExtResource("11_mauia")])
+movement_component = NodePath("MovementComponent")
+collision_component = NodePath("CollisionComponent")
+step_sound_emitter_component = NodePath("StepSoundEmitter")
+jump_sound_emitter_component = NodePath("JumpSoundEmitter")
 max_health = 100.0
 current_health = 100.0
 walk_speed = 400.0
 gravity = 400.0
 
+[node name="MovementComponent" parent="." instance=ExtResource("12_0fq0d")]
+jump_force = -600.0
+walk_speed = 500.0
+
+[node name="CollisionComponent" parent="." instance=ExtResource("70_4jmse")]
+position = Vector2(2, 14)
+
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_nnbg8")
-animation = &"walk"
+animation = &"idle"
+
+[node name="FloorCollisionDetection" parent="." instance=ExtResource("58_2tc04")]
+position = Vector2(2, -16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2ak26")
 }
-speed_scale = 0.8
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(1, 41)
-shape = SubResource("CapsuleShape2D_sgod2")
 
 [node name="StepParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, 120)
@@ -542,4 +549,11 @@ one_shot = true
 fixed_fps = 18
 process_material = SubResource("ParticleProcessMaterial_e6khe")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="StepSoundEmitter" parent="." instance=ExtResource("58_c4upe")]
+sounds = Array[AudioStream]([ExtResource("2_xp8ll"), ExtResource("3_0fq0d"), ExtResource("4_6wwaa"), ExtResource("5_i4qf6"), ExtResource("6_4jmse"), ExtResource("7_2tc04"), ExtResource("8_xcu25"), ExtResource("9_pe2hh"), ExtResource("10_cogra"), ExtResource("11_mauia")])
+
+[node name="JumpSoundEmitter" parent="." instance=ExtResource("58_c4upe")]
+sounds = Array[AudioStream]([ExtResource("69_i4qf6")])
+
+[connection signal="on_landed" from="." to="MovementComponent" method="_on_player_on_landed"]
+[connection signal="on_jump_pressed" from="MovementComponent" to="." method="_on_movement_component_on_jump_pressed"]

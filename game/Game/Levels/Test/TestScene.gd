@@ -1,15 +1,22 @@
 extends Node
 
+# ------------ SIGNALS ------------ 
+
+# ------------ PUBLIC VARIABLES ------------ 
 @export var Managers: Array[ManagerBase]
-	
-# Called when the node enters the scene tree for the first time.
+
+# ------------ PRIVATE VARIABLES ------------ 
+
+# ------------ NATIVE FUNCTIONS ------------ 
 func _ready():
 	print("Initializing managers on Test Scene")
 	for manager in Managers:
 		manager.initialize()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	for manager in Managers:
 		manager.tick(delta)
+
+# ------------ PUBLIC FUNCTIONS ------------ 
+
+# ------------ SIGNAL SUBSCRIPTIONS ------------ 
