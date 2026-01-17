@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0itqc4l7ca32"]
-
-[ext_resource type="Script" uid="uid://glo0g3le6ny8" path="res://Game/Settings/Components/Scripts/SoundEmitterComponent.gd" id="1_aue81"]
-
-[node name="SoundEmitterComponent" type="Node" node_paths=PackedStringArray("audio_player")]
-script = ExtResource("1_aue81")
-audio_player = NodePath("AudioStreamPlayer2D")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

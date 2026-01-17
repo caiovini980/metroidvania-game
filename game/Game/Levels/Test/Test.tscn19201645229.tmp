@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://docgwfusbg4d7"]
+
+[ext_resource type="Script" uid="uid://dopv83uagvvfr" path="res://Game/Levels/Test/TestScene.gd" id="1_0am12"]
+[ext_resource type="Script" uid="uid://cj68lilupyjmo" path="res://Game/Entities/CharacterManager.gd" id="2_ivrkv"]
+[ext_resource type="PackedScene" uid="uid://bh2rxmxy4sgqy" path="res://Game/Entities/Player/Player.tscn" id="3_8p3g4"]
+[ext_resource type="PackedScene" uid="uid://2v0180dw4c40" path="res://Game/Entities/Warrior/Warrior.tscn" id="4_njdjm"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8p3g4"]
+a = Vector2(-227, 17)
+b = Vector2(1814, 17)
+
+[sub_resource type="Gradient" id="Gradient_8p3g4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_njdjm"]
+gradient = SubResource("Gradient_8p3g4")
+
+[node name="Test" type="Node2D" node_paths=PackedStringArray("Managers")]
+script = ExtResource("1_0am12")
+Managers = [NodePath("Managers/CharacterManager")]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment"]
+position = Vector2(145, 723)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D"]
+shape = SubResource("SegmentShape2D_8p3g4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/StaticBody2D"]
+position = Vector2(792, 20)
+scale = Vector2(7.9749894, -2.3293624)
+texture = SubResource("GradientTexture1D_njdjm")
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="CharacterManager" type="Node" parent="Managers" node_paths=PackedStringArray("player_spawn_position")]
+script = ExtResource("2_ivrkv")
+player_character = ExtResource("3_8p3g4")
+enemy_character = ExtResource("4_njdjm")
+player_spawn_position = NodePath("PlayerSpawnPosition")
+
+[node name="PlayerSpawnPosition" type="Marker2D" parent="Managers/CharacterManager"]
+position = Vector2(159, 644)
