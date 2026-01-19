@@ -648,13 +648,12 @@ scale_max = 0.5
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animated_sprite", "step_particles", "movement_component", "hitbox_component", "step_sound_emitter_component", "jump_sound_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animated_sprite", "step_particles", "movement_component", "step_sound_emitter_component", "jump_sound_component")]
 script = ExtResource("1_nnbg8")
 animation_player = NodePath("AnimationPlayer")
 animated_sprite = NodePath("Sprite")
 step_particles = NodePath("StepParticles")
 movement_component = NodePath("MovementComponent")
-hitbox_component = NodePath("AttackHitArea")
 step_sound_emitter_component = NodePath("StepSoundEmitter")
 jump_sound_component = NodePath("JumpSoundEmitter")
 
@@ -668,7 +667,7 @@ walk_speed = 30.0
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_nnbg8")
 animation = &"idle"
-frame = 1
+frame = 3
 
 [node name="FloorCollisionDetection" parent="." instance=ExtResource("58_2tc04")]
 position = Vector2(0, 18)

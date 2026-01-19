@@ -15,7 +15,7 @@ signal on_landed
 
 @export_group("Components")
 @export var movement_component: MovementComponent
-@export var collision_component: CollisionComponent
+@export var hitbox_component: HitboxComponent
 @export var step_sound_emitter_component: SoundEmitterComponent
 @export var jump_sound_component: SoundEmitterComponent
 
@@ -50,11 +50,17 @@ func _ready() -> void:
 	if jump_sound_component == null:
 		jump_sound_component = $JumpSoundEmitter
 		
+	if hitbox_component == null:
+		hitbox_component = $AttackHitArea
+		
 	# setup jump sound correctly
 	var _jump_audio_player: AudioStreamPlayer2D = jump_sound_component.audio_player
 	_jump_audio_player.volume_db = -10
 	_jump_audio = jump_sound_component.get_audio_at(0)
-		
+	
+	# setup colliders
+	hitbox_component.set_collider_visibility(false)
+	
 	print("Instantiated Player")
 
 func _process(delta: float) -> void:
@@ -73,6 +79,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("normal_attack"):
 		_is_attacking = true
+		movement_component.stop()
 
 	movement_component.move(_direction * delta)
 	animated_sprite.flip_h = _last_faced_direction.x < 0
@@ -90,8 +97,12 @@ func _process(delta: float) -> void:
 
 # ------------ PUBLIC FUNCTIONS ------------ 
 func on_attack_ended():
-	print("attack ended")
 	_is_attacking = false
+	hitbox_component.set_collider_visibility(false)
+	movement_component.reset_walk_speed()
+	
+func on_attack_executed():
+	hitbox_component.set_collider_visibility(true)
 
 # ------------ SIGNAL SUBSCRIPTIONS ------------ 
 func on_step() -> void:

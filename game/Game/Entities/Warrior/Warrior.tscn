@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://2v0180dw4c40"]
+[gd_scene load_steps=46 format=3 uid="uid://2v0180dw4c40"]
 
 [ext_resource type="Script" uid="uid://boddh46vofdt4" path="res://Game/Entities/Warrior/Warrior.gd" id="1_b0pyn"]
 [ext_resource type="Texture2D" uid="uid://5a0xg05oq85f" path="res://Game/Entities/Warrior/Animations/Warrior_Attack1.png" id="2_07c37"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://chjw2vinp0ktc" path="res://Game/Entities/Warrior/Animations/Warrior_Guard.png" id="4_spwg3"]
 [ext_resource type="Texture2D" uid="uid://bf113a14ejnel" path="res://Game/Entities/Warrior/Animations/Warrior_Run.png" id="5_nbtai"]
 [ext_resource type="PackedScene" uid="uid://bkitsm4waue4i" path="res://Game/Components/Scenes/GravityComponent.tscn" id="7_2chj1"]
+[ext_resource type="PackedScene" uid="uid://b1t6dxqb8h3aq" path="res://Game/Components/Scenes/HurtboxComponent.tscn" id="8_7glbj"]
+[ext_resource type="PackedScene" uid="uid://o7dd7ka0kt8g" path="res://Game/Components/Scenes/HealthComponent.tscn" id="9_yxqx7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfhjn"]
 atlas = ExtResource("2_07c37")
@@ -382,8 +384,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_spwg3"]
-radius = 18.0
-height = 60.0
+radius = 5.0
+height = 56.0
 
 [node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite")]
 script = ExtResource("1_b0pyn")
@@ -411,3 +413,11 @@ shape = SubResource("CapsuleShape2D_spwg3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 5)
 shape = SubResource("CapsuleShape2D_spwg3")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_7glbj")]
+position = Vector2(0, 3.9999998)
+scale = Vector2(1.9199978, 2.4800003)
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_yxqx7")]
+max_health = 100.0

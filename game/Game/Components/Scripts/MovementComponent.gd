@@ -10,9 +10,11 @@ signal on_jump_pressed
 
 # ------------ PRIVATE VARIABLES ------------ 
 var _is_on_ground: bool = false
+var _normal_speed: float
 
 # ------------ NATIVE FUNCTIONS ------------ 
-
+func _ready():
+	_normal_speed = walk_speed
 
 # ------------ PUBLIC FUNCTIONS ------------ 
 func move(direction: Vector2) -> void:
@@ -26,7 +28,13 @@ func is_touching_the_ground() -> bool:
 	return _is_on_ground
 
 func get_jump_force() -> float:
-	return jump_force
+	return jump_force * 10
+
+func stop() -> void:
+	walk_speed = 0
+	
+func reset_walk_speed() -> void:
+	walk_speed = _normal_speed
 
 # ------------ SIGNAL SUBSCRIPTIONS ------------ 
 func _on_player_on_landed():
