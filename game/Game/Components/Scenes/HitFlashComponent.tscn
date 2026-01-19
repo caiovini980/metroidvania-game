@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://g7oa2f3u0v1e"]
+
+[sub_resource type="Animation" id="Animation_2vllq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/hit_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_eguph"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/hit_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.70000003325, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vllq"]
+_data = {
+&"RESET": SubResource("Animation_2vllq"),
+&"hit_flash": SubResource("Animation_eguph")
+}
+
+[node name="HitFlashComponent" type="AnimationPlayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_2vllq")
+}

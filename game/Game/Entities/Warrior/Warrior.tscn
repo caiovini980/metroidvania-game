@@ -1,14 +1,26 @@
-[gd_scene load_steps=46 format=3 uid="uid://2v0180dw4c40"]
+[gd_scene load_steps=51 format=3 uid="uid://2v0180dw4c40"]
 
 [ext_resource type="Script" uid="uid://boddh46vofdt4" path="res://Game/Entities/Warrior/Warrior.gd" id="1_b0pyn"]
 [ext_resource type="Texture2D" uid="uid://5a0xg05oq85f" path="res://Game/Entities/Warrior/Animations/Warrior_Attack1.png" id="2_07c37"]
 [ext_resource type="Texture2D" uid="uid://bxxbt5d2mo464" path="res://Game/Entities/Warrior/Animations/Warrior_Idle.png" id="2_m6bid"]
+[ext_resource type="Shader" uid="uid://b7qnw4nkwl37h" path="res://Game/Effects/Shaders/HitFlash.gdshader" id="3_eguph"]
 [ext_resource type="Texture2D" uid="uid://bm6lxnv8u5fjl" path="res://Game/Entities/Warrior/Animations/Warrior_Attack2.png" id="3_spwg3"]
 [ext_resource type="Texture2D" uid="uid://chjw2vinp0ktc" path="res://Game/Entities/Warrior/Animations/Warrior_Guard.png" id="4_spwg3"]
 [ext_resource type="Texture2D" uid="uid://bf113a14ejnel" path="res://Game/Entities/Warrior/Animations/Warrior_Run.png" id="5_nbtai"]
 [ext_resource type="PackedScene" uid="uid://bkitsm4waue4i" path="res://Game/Components/Scenes/GravityComponent.tscn" id="7_2chj1"]
 [ext_resource type="PackedScene" uid="uid://b1t6dxqb8h3aq" path="res://Game/Components/Scenes/HurtboxComponent.tscn" id="8_7glbj"]
 [ext_resource type="PackedScene" uid="uid://o7dd7ka0kt8g" path="res://Game/Components/Scenes/HealthComponent.tscn" id="9_yxqx7"]
+[ext_resource type="PackedScene" uid="uid://g7oa2f3u0v1e" path="res://Game/Components/Scenes/HitFlashComponent.tscn" id="11_2vllq"]
+[ext_resource type="PackedScene" uid="uid://c0itqc4l7ca32" path="res://Game/Components/Scenes/SoundComponent.tscn" id="12_dsh6g"]
+[ext_resource type="AudioStream" uid="uid://bjtniy2u4rw16" path="res://Game/Effects/chop.ogg" id="13_j8q6d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxqx7"]
+resource_local_to_scene = true
+shader = ExtResource("3_eguph")
+shader_parameter/hit_color = Color(1, 1, 1, 1)
+shader_parameter/final_hit_color = Color(1, 0, 0, 1)
+shader_parameter/hit_strength = 0.0
+shader_parameter/is_final_hit = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfhjn"]
 atlas = ExtResource("2_07c37")
@@ -387,17 +399,19 @@ _data = {
 radius = 5.0
 height = 56.0
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite", "health_component", "hurtbox_component")]
 script = ExtResource("1_b0pyn")
 animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("AnimatedSprite2D")
+health_component = NodePath("HealthComponent")
+hurtbox_component = NodePath("HurtboxComponent")
 
 [node name="GravityComponent" parent="." instance=ExtResource("7_2chj1")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_yxqx7")
 sprite_frames = SubResource("SpriteFrames_y1jnc")
-animation = &"idle"
-frame_progress = 0.90248823
+animation = &"attack_1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -414,10 +428,18 @@ shape = SubResource("CapsuleShape2D_spwg3")
 position = Vector2(-5, 5)
 shape = SubResource("CapsuleShape2D_spwg3")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_7glbj")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_flash", "sprite", "on_hit_sound_emitter") instance=ExtResource("8_7glbj")]
 position = Vector2(0, 3.9999998)
 scale = Vector2(1.9199978, 2.4800003)
 health_component = NodePath("../HealthComponent")
+hit_flash = NodePath("../HitFlashComponent")
+sprite = NodePath("../AnimatedSprite2D")
+on_hit_sound_emitter = NodePath("../OnHitSoundEmitter")
 
 [node name="HealthComponent" parent="." instance=ExtResource("9_yxqx7")]
 max_health = 100.0
+
+[node name="HitFlashComponent" parent="." instance=ExtResource("11_2vllq")]
+
+[node name="OnHitSoundEmitter" parent="." instance=ExtResource("12_dsh6g")]
+sounds = Array[AudioStream]([ExtResource("13_j8q6d")])

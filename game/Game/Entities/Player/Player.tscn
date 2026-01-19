@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://bh2rxmxy4sgqy"]
+[gd_scene load_steps=84 format=3 uid="uid://bh2rxmxy4sgqy"]
 
 [ext_resource type="Script" uid="uid://b0nfdhryt1x7n" path="res://Game/Entities/Player/Player.gd" id="1_nnbg8"]
 [ext_resource type="AudioStream" uid="uid://c52bdlq5oou74" path="res://Game/Entities/Player/Effects/SFX/Walk/Footsteps_Sand_Walk_01.wav" id="2_xp8ll"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://nnya1eu8h07c" path="res://Game/Components/Scenes/MovementComponent.tscn" id="12_0fq0d"]
 [ext_resource type="Texture2D" uid="uid://cp2f0b27dbp8n" path="res://Game/Effects/Particles/Dust_01.png" id="20_uabuf"]
 [ext_resource type="PackedScene" uid="uid://bqe6k66tmc832" path="res://Game/Components/Scenes/HitboxComponent.tscn" id="25_0xjwd"]
+[ext_resource type="AudioStream" uid="uid://bo5ub5yr3exsk" path="res://Game/Effects/metalClick.ogg" id="26_lbtsn"]
 [ext_resource type="Script" uid="uid://da6ug2qcqf7jk" path="res://Game/Components/Scripts/HitboxComponent.gd" id="30_q0rky"]
 [ext_resource type="PackedScene" uid="uid://cgdcwhdsr600o" path="res://Game/Components/Scenes/TriggerComponent.tscn" id="58_2tc04"]
 [ext_resource type="PackedScene" uid="uid://c0itqc4l7ca32" path="res://Game/Components/Scenes/SoundComponent.tscn" id="58_c4upe"]
@@ -648,7 +649,7 @@ scale_max = 0.5
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animated_sprite", "step_particles", "movement_component", "hitbox_component", "step_sound_emitter_component", "jump_sound_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animated_sprite", "step_particles", "movement_component", "hitbox_component", "step_sound_emitter_component", "jump_sound_component", "attack_sound_component")]
 script = ExtResource("1_nnbg8")
 animation_player = NodePath("AnimationPlayer")
 animated_sprite = NodePath("Sprite")
@@ -657,6 +658,7 @@ movement_component = NodePath("MovementComponent")
 hitbox_component = NodePath("AttackHitArea")
 step_sound_emitter_component = NodePath("StepSoundEmitter")
 jump_sound_component = NodePath("JumpSoundEmitter")
+attack_sound_component = NodePath("AttackSoundEmitter")
 
 [node name="MovementComponent" parent="." instance=ExtResource("12_0fq0d")]
 jump_force = 60.0
@@ -668,7 +670,6 @@ walk_speed = 30.0
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_nnbg8")
 animation = &"idle"
-frame = 1
 
 [node name="FloorCollisionDetection" parent="." instance=ExtResource("58_2tc04")]
 position = Vector2(0, 18)
@@ -707,6 +708,9 @@ process_material = SubResource("ParticleProcessMaterial_2gvph")
 [node name="AttackHitArea" parent="." instance=ExtResource("25_0xjwd")]
 position = Vector2(49, -6)
 collision_mask = 2
+
+[node name="AttackSoundEmitter" parent="." instance=ExtResource("58_c4upe")]
+sounds = Array[AudioStream]([ExtResource("26_lbtsn")])
 
 [connection signal="on_landed" from="." to="MovementComponent" method="_on_player_on_landed"]
 [connection signal="on_jump_pressed" from="MovementComponent" to="." method="_on_movement_component_on_jump_pressed"]

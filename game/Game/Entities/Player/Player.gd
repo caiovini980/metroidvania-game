@@ -16,13 +16,15 @@ signal on_landed
 @export_group("Components")
 @export var movement_component: MovementComponent
 @export var hitbox_component: HitboxComponent
+
+@export_group("Sounds")
 @export var step_sound_emitter_component: SoundEmitterComponent
 @export var jump_sound_component: SoundEmitterComponent
+@export var attack_sound_component: SoundEmitterComponent
 
 # ------------ PRIVATE VARIABLES ------------ 
 var _jump_audio: AudioStream
 var _is_on_air: bool = false
-var _can_animate: bool = true
 var _is_attacking: bool = false
 var _direction: Vector2
 var _last_faced_direction: Vector2 = Vector2.RIGHT
@@ -53,6 +55,9 @@ func _ready() -> void:
 	if hitbox_component == null:
 		hitbox_component = $AttackHitArea
 		
+	if attack_sound_component == null:
+		attack_sound_component = $AttackSoundEmitter
+		
 	# setup jump sound correctly
 	var _jump_audio_player: AudioStreamPlayer2D = jump_sound_component.audio_player
 	_jump_audio_player.volume_db = -10
@@ -79,6 +84,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("normal_attack"):
 		_is_attacking = true
+		_play_attack_audio()
 		movement_component.stop()
 
 	movement_component.move(_direction * delta)
@@ -90,8 +96,6 @@ func _process(delta: float) -> void:
 			_is_on_air = false
 	else:
 		_is_on_air = true
-		
-	_handle_animations()
 	
 	move_and_slide()
 
@@ -106,8 +110,9 @@ func on_attack_executed():
 
 # ------------ SIGNAL SUBSCRIPTIONS ------------ 
 func on_step() -> void:
-	_play_step_sound()
-	_play_step_particles()
+	if is_on_floor():
+		_play_step_sound()
+		_play_step_particles()
 
 func _on_movement_component_on_jump_pressed(jump_force: float) -> void:
 	if is_on_floor():
@@ -115,22 +120,6 @@ func _on_movement_component_on_jump_pressed(jump_force: float) -> void:
 		jump_sound_component.play_audio(_jump_audio)
 
 # ------------ PRIVATE FUNCTIONS ------------ 
-func _handle_animations() -> void:
-	if !_can_animate: return
-	
-	#if !is_on_floor():
-		#if velocity.y > 0 and !movement_component.is_touching_the_ground():
-			#animation_player.play("idle")
-		#else:
-			#animation_player.play("idle")
-		#return
-		#
-	#if _direction.length() > 0:
-		#animation_player.play("walk")
-	#else:
-		#pass
-		#animation_player.play("idle")
-
 func _land() -> void:
 	on_landed.emit()
 	_play_step_sound()
@@ -139,6 +128,10 @@ func _land() -> void:
 func _play_step_sound() -> void:
 	var step_sound: AudioStream = step_sound_emitter_component.get_random_audio()
 	step_sound_emitter_component.play_audio(step_sound)	
+
+func _play_attack_audio() -> void:
+	var attack_sound: AudioStream = attack_sound_component.get_audio_at(0)
+	attack_sound_component.play_audio(attack_sound)
 
 func _play_step_particles() -> void:
 	step_particles.restart()
