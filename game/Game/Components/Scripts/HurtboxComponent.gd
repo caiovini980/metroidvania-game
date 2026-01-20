@@ -8,11 +8,16 @@ class_name HurtboxComponent
 @export var hit_flash: AnimationPlayer
 @export var sprite: AnimatedSprite2D
 @export var on_hit_sound_emitter: SoundEmitterComponent 
+@export var knockback_duration: float = 1
+@export var knockback_force: float = 100
 
 # ------------ PRIVATE VARIABLES ------------ 
+var _knockback_timer: Timer
 
 # ------------ NATIVE FUNCTIONS ------------ 
 func _ready() -> void:
+	_knockback_timer = $Timer
+	
 	connect("area_entered", Callable.create(self, "_on_area_entered"))
 	sprite.material.set_shader_parameter("is_final_hit", false)
 	
@@ -29,11 +34,22 @@ func _on_area_entered(hitbox: HitboxComponent) -> void:
 	if hitbox == null or health_component.get_current_health() <= 0:
 		return
 	
-	var direction: Vector2 = hitbox.owner.position - owner.position
-	print(direction.normalized())
-	# push owner back a little
-	#owner.position.x = direction.normalized * 5
 	health_component.apply_to_health(-hitbox.damage)
-	print("current health from of "+ owner.name + " is " + String.num(health_component.get_current_health()))
 	hit_flash.play("hit_flash")
 	_play_sound_on_hit()
+	
+	var direction: Vector2 = hitbox.owner.global_position - owner.global_position
+	_apply_force_during_time(direction.normalized(), knockback_force, knockback_duration)
+
+func _apply_force_during_time(direction: Vector2, force: float, duration: float) -> void:
+	if direction.x <= 0:
+		# push left
+		owner.velocity.x = force
+	else:
+		# push right
+		owner.velocity.x = -force
+		
+	_knockback_timer.start(duration)
+
+func _on_timer_timeout():
+	owner.velocity.x = 0

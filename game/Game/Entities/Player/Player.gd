@@ -95,6 +95,8 @@ func _process(delta: float) -> void:
 			movement_component.stop()
 
 	movement_component.move(_direction * delta)
+	
+	# rotate sprite when facing left
 	animated_sprite.flip_h = _last_faced_direction.x < 0
 	
 	# Adjust hitbox collider if turn left
@@ -103,6 +105,7 @@ func _process(delta: float) -> void:
 	else:
 		hitbox_component.global_position.x = global_position.x + _distance_to_hitbox
 		
+	# landing check
 	if is_on_floor():
 		if _is_on_air:
 			_land()
@@ -110,6 +113,7 @@ func _process(delta: float) -> void:
 	else:
 		_is_on_air = true
 	
+	# apply movement
 	move_and_slide()
 
 # ------------ PUBLIC FUNCTIONS ------------ 

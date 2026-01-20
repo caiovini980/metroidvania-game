@@ -670,7 +670,7 @@ walk_speed = 30.0
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_nnbg8")
 animation = &"idle"
-frame = 1
+frame = 3
 
 [node name="HitboxComponent" parent="Sprite" instance=ExtResource("25_0xjwd")]
 position = Vector2(49, 14)
