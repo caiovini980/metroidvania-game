@@ -29,6 +29,10 @@ func _on_area_entered(hitbox: HitboxComponent) -> void:
 	if hitbox == null or health_component.get_current_health() <= 0:
 		return
 	
+	var direction: Vector2 = hitbox.owner.position - owner.position
+	print(direction.normalized())
+	# push owner back a little
+	#owner.position.x = direction.normalized * 5
 	health_component.apply_to_health(-hitbox.damage)
 	print("current health from of "+ owner.name + " is " + String.num(health_component.get_current_health()))
 	hit_flash.play("hit_flash")

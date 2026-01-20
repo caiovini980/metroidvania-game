@@ -28,6 +28,7 @@ var _is_on_air: bool = false
 var _is_attacking: bool = false
 var _direction: Vector2
 var _last_faced_direction: Vector2 = Vector2.RIGHT
+var _distance_to_hitbox: float
 
 # ------------ NATIVE FUNCTIONS ------------ 
 func _ready() -> void:
@@ -53,7 +54,7 @@ func _ready() -> void:
 		jump_sound_component = $JumpSoundEmitter
 		
 	if hitbox_component == null:
-		hitbox_component = $AttackHitArea
+		hitbox_component = $HitboxComponent
 		
 	if attack_sound_component == null:
 		attack_sound_component = $AttackSoundEmitter
@@ -63,33 +64,45 @@ func _ready() -> void:
 	_jump_audio_player.volume_db = -10
 	_jump_audio = jump_sound_component.get_audio_at(0)
 	
+	# get distance to hitbox component so we can move it later
+	_distance_to_hitbox = hitbox_component.global_position.x - global_position.x
+	
 	# setup colliders
 	hitbox_component.set_collider_visibility(false)
 	
 	print("Instantiated Player")
 
 func _process(delta: float) -> void:
-	_direction = Vector2.ZERO
-	
-	if Input.is_action_pressed("move_left"):
-		_direction = Vector2.LEFT
-		_last_faced_direction = _direction
+	if !_is_attacking:
+		_direction = Vector2.ZERO
 		
-	if Input.is_action_pressed("move_right"):
-		_direction = Vector2.RIGHT
-		_last_faced_direction = _direction
-		
-	if Input.is_action_just_pressed("jump"):
-		movement_component.jump()
-	
+		if Input.is_action_pressed("move_left"):
+			_direction = Vector2.LEFT
+			_last_faced_direction = _direction
+			
+		if Input.is_action_pressed("move_right"):
+			_direction = Vector2.RIGHT
+			_last_faced_direction = _direction
+			
+		if Input.is_action_just_pressed("jump"):
+			movement_component.jump()
+			
 	if Input.is_action_pressed("normal_attack"):
 		_is_attacking = true
 		_play_attack_audio()
-		movement_component.stop()
+		
+		if is_on_floor():
+			movement_component.stop()
 
 	movement_component.move(_direction * delta)
 	animated_sprite.flip_h = _last_faced_direction.x < 0
 	
+	# Adjust hitbox collider if turn left
+	if _last_faced_direction == Vector2.LEFT:
+		hitbox_component.global_position.x = global_position.x - _distance_to_hitbox
+	else:
+		hitbox_component.global_position.x = global_position.x + _distance_to_hitbox
+		
 	if is_on_floor():
 		if _is_on_air:
 			_land()

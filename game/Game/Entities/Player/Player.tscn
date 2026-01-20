@@ -655,7 +655,7 @@ animation_player = NodePath("AnimationPlayer")
 animated_sprite = NodePath("Sprite")
 step_particles = NodePath("StepParticles")
 movement_component = NodePath("MovementComponent")
-hitbox_component = NodePath("AttackHitArea")
+hitbox_component = NodePath("Sprite/HitboxComponent")
 step_sound_emitter_component = NodePath("StepSoundEmitter")
 jump_sound_component = NodePath("JumpSoundEmitter")
 attack_sound_component = NodePath("AttackSoundEmitter")
@@ -670,6 +670,11 @@ walk_speed = 30.0
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_nnbg8")
 animation = &"idle"
+frame = 1
+
+[node name="HitboxComponent" parent="Sprite" instance=ExtResource("25_0xjwd")]
+position = Vector2(49, 14)
+collision_mask = 2
 
 [node name="FloorCollisionDetection" parent="." instance=ExtResource("58_2tc04")]
 position = Vector2(0, 18)
@@ -704,10 +709,6 @@ amount = 1
 texture = ExtResource("20_uabuf")
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_2gvph")
-
-[node name="AttackHitArea" parent="." instance=ExtResource("25_0xjwd")]
-position = Vector2(49, -6)
-collision_mask = 2
 
 [node name="AttackSoundEmitter" parent="." instance=ExtResource("58_c4upe")]
 sounds = Array[AudioStream]([ExtResource("26_lbtsn")])
