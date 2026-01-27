@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://2v0180dw4c40"]
+[gd_scene load_steps=57 format=3 uid="uid://2v0180dw4c40"]
 
 [ext_resource type="Script" uid="uid://boddh46vofdt4" path="res://Game/Entities/Warrior/Warrior.gd" id="1_b0pyn"]
 [ext_resource type="Texture2D" uid="uid://5a0xg05oq85f" path="res://Game/Entities/Warrior/Animations/Warrior_Attack1.png" id="2_07c37"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://g7oa2f3u0v1e" path="res://Game/Components/Scenes/HitFlashComponent.tscn" id="11_2vllq"]
 [ext_resource type="PackedScene" uid="uid://c0itqc4l7ca32" path="res://Game/Components/Scenes/SoundComponent.tscn" id="12_dsh6g"]
 [ext_resource type="AudioStream" uid="uid://bjtniy2u4rw16" path="res://Game/Effects/chop.ogg" id="13_j8q6d"]
+[ext_resource type="Script" uid="uid://bwpfgvwvwavcv" path="res://Game/Entities/Warrior/StateMachine/StateMachineController.gd" id="14_881xl"]
+[ext_resource type="Script" uid="uid://bx72jc5ytb7vs" path="res://Game/Entities/Warrior/StateMachine/WarriorStateMachine.gd" id="14_j8q6d"]
+[ext_resource type="Script" uid="uid://dwkfn6wsbk123" path="res://Game/Entities/Warrior/StateMachine/IdleState.gd" id="15_cl55c"]
+[ext_resource type="Script" uid="uid://boaunuq1n0bav" path="res://Game/Entities/Warrior/StateMachine/AttackState.gd" id="16_3ypfl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxqx7"]
 resource_local_to_scene = true
@@ -396,10 +400,18 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_spwg3"]
-radius = 5.0
-height = 56.0
+radius = 17.0
+height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_881xl"]
+radius = 13.020847
+height = 34.677414
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1v7w0"]
+radius = 407.0786
 
 [node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite", "health_component", "hurtbox_component")]
+collision_layer = 4
 script = ExtResource("1_b0pyn")
 animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("AnimatedSprite2D")
@@ -412,29 +424,29 @@ hurtbox_component = NodePath("HurtboxComponent")
 material = SubResource("ShaderMaterial_yxqx7")
 sprite_frames = SubResource("SpriteFrames_y1jnc")
 animation = &"attack_1"
+autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2wxdl")
 }
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-5, 5)
-shape = SubResource("CapsuleShape2D_spwg3")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 5)
+visible = false
+position = Vector2(-2, 0)
 shape = SubResource("CapsuleShape2D_spwg3")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_flash", "sprite", "on_hit_sound_emitter") instance=ExtResource("8_7glbj")]
-position = Vector2(0, 3.9999998)
+position = Vector2(-0.99999994, 2)
 scale = Vector2(1.9199978, 2.4800003)
 health_component = NodePath("../HealthComponent")
 hit_flash = NodePath("../HitFlashComponent")
 sprite = NodePath("../AnimatedSprite2D")
 on_hit_sound_emitter = NodePath("../OnHitSoundEmitter")
+
+[node name="HurtBoxCollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-2.6041696, -2.4193544)
+shape = SubResource("CapsuleShape2D_881xl")
 
 [node name="HealthComponent" parent="." instance=ExtResource("9_yxqx7")]
 max_health = 100.0
@@ -443,3 +455,33 @@ max_health = 100.0
 
 [node name="OnHitSoundEmitter" parent="." instance=ExtResource("12_dsh6g")]
 sounds = Array[AudioStream]([ExtResource("13_j8q6d")])
+
+[node name="StateMachineController" type="Node" parent="." node_paths=PackedStringArray("warrior_state_machine")]
+script = ExtResource("14_881xl")
+warrior_state_machine = NodePath("../StateMachine")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("14_j8q6d")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("15_cl55c")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("16_3ypfl")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+speed = 100
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("CircleShape2D_1v7w0")
+debug_color = Color(0.7588383, 0.4522375, 0.0927578, 0.41960785)
+
+[connection signal="body_entered" from="AttackArea2D" to="StateMachineController" method="_on_attack_area_2d_body_entered"]
+[connection signal="body_exited" from="AttackArea2D" to="StateMachineController" method="_on_attack_area_2d_body_exited"]

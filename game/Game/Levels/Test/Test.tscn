@@ -2653,7 +2653,7 @@ tile_set = SubResource("TileSet_b7641")
 
 [node name="Warrior" parent="." instance=ExtResource("4_njdjm")]
 z_index = 1
-position = Vector2(1617, 550)
+position = Vector2(688, 633)
 
 [node name="Player" parent="." instance=ExtResource("3_8p3g4")]
 z_index = 1

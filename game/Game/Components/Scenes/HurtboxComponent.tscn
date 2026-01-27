@@ -1,16 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1t6dxqb8h3aq"]
+[gd_scene load_steps=2 format=3 uid="uid://b1t6dxqb8h3aq"]
 
 [ext_resource type="Script" uid="uid://bi3hnx6apboch" path="res://Game/Components/Scripts/HurtboxComponent.gd" id="1_fyakv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyakv"]
 
 [node name="HurtboxComponent" type="Area2D"]
 script = ExtResource("1_fyakv")
 knockback_duration = 0.1
 knockback_force = 300.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_fyakv")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

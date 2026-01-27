@@ -17,7 +17,7 @@ func _ready() -> void:
 	health_component.connect("health_reached_zero", Callable.create(self, "_on_died"))
 
 func _process(_delta: float) -> void:
-	animation_player.play("idle")
+	#animation_player.play("idle")
 	move_and_slide()
 	
 # ------------ PRIVATE FUNCTIONS ------------ 
